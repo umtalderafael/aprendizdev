@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Aprendizdev</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <style>
+        .bg-overlay{
+          background: rgba(0,0,0, .7);
+          position: absolute;
+          top: -60px;
+          bottom: -100px;
+          left: 0;
+          right:0;
+          z-index: 0;
+        }
+        video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -ms-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+            /*background: url(facade.jpg) no-repeat;*/
+            background-size: cover;
+            -webkit-transition: 1s opacity;
+            transition: 1s opacity;
+            z-index: 0;
+        }
+        .ov-hidden{
+          overflow: hidden;
+        }
+      </style>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-light bg-white  navbar-expand-md">
+    	<div class="container">
+      		<a class="navbar-brand" href="/">
+        		aprendizDEV
+      		</a>
+      		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav3" aria-controls="navbarNav3" aria-expanded="false" aria-label="Toggle navigation">
+        		<span class="navbar-toggler-icon"></span>
+      		</button>
+      		<div class="collapse navbar-collapse" id="navbarNav3">
+        		<ul class="navbar-nav ml-auto">
+          			<li class="nav-item active">
+            			<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          			</li>
+          			<li class="nav-item">
+            			<a class="nav-link" href="#">Sobre</a>
+          			</li>
+          			<li class="nav-item">
+            			<a class="nav-link" href="#">Contato</a>
+          			</li>
+        		</ul>
+
+				<% if logged_in? %>
+
+					<%= current_user.username %>
+
+				    <%= button_to "Sair", '/logout', method: :get, class: "btn btn-outline-dark ml-md-3", data: {title: "Atenção!", confirm: 'Tem certeza que deseja sair?', commit: 'Sair', cancel: "Cancelar"}  %>
+
+				<% else %>
+
+
+					<div class="btn-group" role="group" aria-label="Basic example">
+						<%= link_to "Entrar", '/login', method: :get, class: "btn btn-outline-dark"%>
+						<%= link_to "Cadastrar", '/users/new', method: :get, class: "btn btn-outline-dark"%>
+					</div>
+
+				<%end%>
+
+      		</div>
+    	</div>
+  	</nav>
+
+	<%= yield %>
+
+</body>
+</html>

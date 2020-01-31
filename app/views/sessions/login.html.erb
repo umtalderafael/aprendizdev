@@ -1,0 +1,82 @@
+
+<div id="login">    
+    <div class="container">
+
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+
+                
+
+                <div class="login-box col-md-12">
+
+                	<%= form_tag '/login', class: "form" do %>
+                    
+                        <h3 class="text-center" style="color: white;">ENTRAR</h3> 
+                        <div class="form-group">
+                            <label for="username" class="text-info">E-mail</label><br>
+                            <%= text_field_tag :username , nil,  placeholder: "Digite seu e-mail", class: 'form-control', :required => true %>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Senha</label><br>
+                            <%= password_field_tag :password , nil,  placeholder: "Digite a senha", class: 'form-control', :required => true %>
+                        </div>
+                        <div class="form-group">
+
+	                        <div id="register-link" class="text-right">
+	                            <a href="/users/new" class="text-info">Quero me cadastrar</a>
+	                        </div>
+	                        
+                        	<input id="remember-me" name="remember-me" type="checkbox">
+                            <label for="remember-me" class="text-info">
+                            	<span>Lembrar senha</span> 
+                            	<span></span>
+                            </label>
+                            <br>
+
+                            <%= submit_tag "Entrar", class:"btn btn-info btn-md btn-login" %>
+                            
+                        </div>
+
+                    <%end%>
+                    
+                    <% if flash[:notice] %> 
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong><%= flash[:notice] %></strong>    
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <% end %> 
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style type="text/css">
+
+	body {
+	  background-image: linear-gradient(to left top, #007a99 , #14abc4, #007a99, #007a99, #007a99);
+	  height: 100vh;
+	}
+	#login .container #login-row #login-column .login-box {
+	  margin-top: 120px;
+	  max-width: 600px;
+	  height: 350px;
+	  border: 1px solid #343a40 ;
+	  background-image: linear-gradient(to bottom, #343a40 , #343a40 , #343a40 , #343a40 , #343a40 );
+	}
+	#login .container #login-row #login-column .login-box .form {
+	  padding: 20px;
+	}
+	#login .container #login-row #login-column .login-box #login-form #register-link {
+	  margin-top: -85px;
+	}	
+
+	.btn-login {
+		border-radius: 0;
+	}
+
+</style>
