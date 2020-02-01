@@ -45,7 +45,7 @@
 </head>
 <body>
 
-	<nav class="navbar navbar-light bg-white  navbar-expand-md">
+	<nav class="navbar navbar-light bg-white  navbar-expand-md shadow-sm p-3 bg-white rounded">
     	<div class="container">
       		<a class="navbar-brand" href="/">
         		aprendizDEV
@@ -59,25 +59,44 @@
             			<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           			</li>
           			<li class="nav-item">
-            			<a class="nav-link" href="#">Sobre</a>
+            			<a class="nav-link" href="/about">Sobre</a>
           			</li>
           			<li class="nav-item">
-            			<a class="nav-link" href="#">Contato</a>
+            			<a class="nav-link" href="/contact">Contato</a>
           			</li>
+                    <li class="nav-item">
+                        &nbsp; &nbsp; &nbsp; &nbsp;
+                    </li>
         		</ul>
+
+                <% 
+                    if request.env['PATH_INFO'] == '/login'                               
+                        botaoLogin = 'active' 
+                    elsif request.env['PATH_INFO'] == '/users/new'                         
+                        botaoCadastrar = 'active'                                        
+                    end    
+                %> 
 
 				<% if logged_in? %>
 
-					<%= current_user.username %>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <%= icon('far', 'user', class: 'strong') %> <%= current_user.nome.to_s.split(' ')[0] %> 
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            
+                            <a class="dropdown-item" href="/profile">Minha conta</a>                          
 
-				    <%= button_to "Sair", '/logout', method: :get, class: "btn btn-outline-dark ml-md-3", data: {title: "Atenção!", confirm: 'Tem certeza que deseja sair?', commit: 'Sair', cancel: "Cancelar"}  %>
+                            <%= button_to "Sair", '/logout', method: :get, class: "dropdown-item", data: {title: "Atenção!", confirm: 'Tem certeza que deseja sair?', commit: 'Sair', cancel: "Cancelar"}  %>
 
+                        </div>
+                    </div>
+	
 				<% else %>
 
-
 					<div class="btn-group" role="group" aria-label="Basic example">
-						<%= link_to "Entrar", '/login', method: :get, class: "btn btn-outline-dark"%>
-						<%= link_to "Cadastrar", '/users/new', method: :get, class: "btn btn-outline-dark"%>
+						<%= link_to "Entrar", '/login', method: :get, class: "btn btn-outline-dark #{botaoLogin}"%>
+						<%= link_to "Cadastrar", '/users/new', method: :get, class: "btn btn-outline-dark #{botaoCadastrar}"%>
 					</div>
 
 				<%end%>

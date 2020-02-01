@@ -1,15 +1,25 @@
 
 <div class="main-w3layouts wrapper">
-	<h1>CADASTRAR</h1>
+	<h1 style="font-size: 25px; font-weight: bold;">
+		<strong>	CADASTRAR </strong>
+	</h1>
 	<div class="main-agileinfo">
 		<div class="agileits-top">
 			<%= form_for @user do |f| %>
 
+				<%= f.text_field :nome , placeholder: "Digite seu nome", class: 'input-sign text', :required => true %>
 
-				<%= f.text_field :username , placeholder: "Digite seu e-mail", class: 'input-sign text', :required => true %>
+				<%= f.text_field :username , placeholder: "Digite o e-mail", class: 'input-sign text', :required => true %>
 
-				<%= f.text_field :password , placeholder: "Digite a senha", class: 'input-sign text', :required => true %>
+				<%= f.password_field :password , placeholder: "Digite a senha", class: 'input-sign text', :required => true %>
 
+				<%= f.number_field :idade , placeholder: "Informe a idade", class: 'input-sign text', :required => true %>
+
+			    <%= f.radio_button :tipo, "dev", :checked => true %>
+			    <%= f.label :tipo, "Desenvolvedor", :value => "dev", class: "label-sign"  %> <br>
+
+			    <%= f.radio_button :tipo, "aprendiz" %> 				    
+			    <%= f.label :tipo, "Aprendiz", :value => "aprendiz", class: "label-sign" %> <br><br>
 				
 				<div class="wthree-text">
 					<label class="anim">
@@ -19,7 +29,7 @@
 					<div class="clear"> </div>
 				</div>
 
-				<%= f.submit "Cadastrar", class: "btn-sign" %>
+				<%= f.submit "ENVIAR", class: "btn-sign" %>
 				
 			<%end%>
 
@@ -45,6 +55,11 @@
 </div>
 
 <style type="text/css" media="screen">
+
+
+	.label-sign {
+		color: white;
+	}
 	
 	 
 

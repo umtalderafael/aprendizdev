@@ -1,0 +1,16 @@
+<div class="container">
+
+	<h3>Novo endereço</h3>
+
+	<%= form_for @location do |f| %>
+
+		<%= f.text_field :cep , placeholder: "Digite seu CEP", class: 'form-control', :required => true %>
+
+		<%= f.text_field :cidade , placeholder: "Cidade", class: 'form-control', :required => true %>
+
+		<%= f.text_field :estado , placeholder: "Estado", class: 'form-control', :required => true %>
+		
+		<%= f.submit "ENVIAR", class: "btn btn-primary" %> 
+		
+	<%end%>	
+</div>

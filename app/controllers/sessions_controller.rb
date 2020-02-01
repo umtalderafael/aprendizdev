@@ -18,6 +18,11 @@ class SessionsController < ApplicationController
   	end
 
   	def login
+
+      if logged_in?
+        redirect_to '/'             
+      end
+
   	end
 
   	def destroy
