@@ -4,8 +4,7 @@ class CreateLocations < ActiveRecord::Migration[5.1]
 
     	t.string :cep
     	t.string :cidade
-    	t.string :estado
-    	t.integer :user_id
+    	t.string :estado    	
 
       t.timestamps
     end

@@ -13,11 +13,13 @@ class SessionsController < ApplicationController
   	      redirect_to '/'
   	   else
           flash[:notice] = "Dados de usuario não encontrados."
-  	      redirect_to '/login'
+  	      redirect_to "/login?username=#{params[:username]}"
   	   end
   	end
 
   	def login
+
+      @user = User.new
 
       if logged_in?
         redirect_to '/'             
@@ -31,6 +33,8 @@ class SessionsController < ApplicationController
   	end
 
   	def welcome
+
+      @user = User.new
   	end
   	
 end

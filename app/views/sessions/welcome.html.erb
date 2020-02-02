@@ -1,4 +1,3 @@
-
 <section class="ov-hidden pt-5 pb-5 bg-dark position-relative" style="min-height:100vh; background-image: url(https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80); background-size: cover;">
 	
 	<video playsinline="" autoplay="true" muted="true" loop="true" poster="http://casagiacometti.com/photo/facade.JPG" id="bgvid">
@@ -16,39 +15,22 @@
 				</div>
 				<div class="d-flex justify-content-center justify-content-lg-start" data-aos="fade-up">
 					<div class="d-flex mr-2">
-
 						<%= icon('fab', 'html5', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'css3-alt', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'sass', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'js', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'node', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'angular', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'react', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'vuejs', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fas', 'meteor', class: 'fa-lg text-warning m-1') %>						
-
 						<%= icon('fab', 'php', class: 'fa-lg text-warning m-1') %>						
-
 						<%= icon('fab', 'laravel', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fas', 'database', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'swift', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'apple', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'java', class: 'fa-lg text-warning m-1') %>
-
 						<%= icon('fab', 'android', class: 'fa-lg text-warning m-1') %>
-
 					</div>
 
 				</div>
@@ -56,14 +38,16 @@
 			<div class="col">
 				<div class="row justify-content-center">
 					<div class="col-xl-8 col-md-10">
-						<form class="position-relative d-block" data-aos="fade-up">
+
+						<form class="position-relative d-block" data-aos="fade-up" action="users/new" method="get">
+
 							<div class="form-group">
 								<label class="text-white" for="course-name-1">Nome</label>
-                				<input name="course-name" id="course-name-1" type="text" class="form-control form-control-lg" placeholder="Nome completo">
+                				<input name="user[nome]" id="course-name-1" type="text" class="form-control form-control-lg" placeholder="Nome completo" required>
 							</div>
 							<div class="form-group">
 								<label class="text-white" for="course-email-1">E-mail</label>
-                				<input name="course-email" id="course-email-1" type="email" class="form-control form-control-lg" placeholder="email@exemplo.com">
+                				<input name="user[username]" id="course-email-1" type="email" class="form-control form-control-lg" placeholder="email@exemplo.com" required>
 							</div>
 							<div class="form-group">
 								<div class="row">
@@ -75,7 +59,7 @@
 									<div class="col">
 										<div class="form-group rounded bg-white p-2 border">
 											<div class="custom-control custom-radio">
-												<input type="radio" id="course-radio-beginner-1" name="course-radio-1" class="custom-control-input">
+												<input type="radio" id="course-radio-beginner-1" name="user[tipo]" class="custom-control-input"  value="Aprendiz" required>
 												<label class="custom-control-label" for="course-radio-beginner-1">Aprendiz</label>
 											</div>
 										</div>
@@ -83,7 +67,7 @@
 									<div class="col">
 										<div class="form-group rounded bg-white p-2 border">
 											<div class="custom-control custom-radio">
-												<input type="radio" id="course-radio-advanced-1" name="course-radio-1" class="custom-control-input">
+												<input type="radio" id="course-radio-advanced-1" name="user[tipo]" class="custom-control-input" value="Desenvolvedor" required>
 												<label class="custom-control-label" for="course-radio-advanced-1">Desenvolvedor</label>
 											</div>
 										</div>
@@ -95,6 +79,7 @@
 								<small class="text-white">Quem ensina também está aprendendo.</small>
 							</div>
 						</form>
+
 					</div>
 				</div>
 			</div>
@@ -152,11 +137,6 @@
 	</div>
 </section>
 
-
-
-
-
-
 <section class="mb-0 mt-0">
 	<div class="footer text-white">
 		<div class="   bg-dark pt-5 pb-5">
@@ -182,11 +162,7 @@
 							<b>aprendizDEV</b>
 							<br> São José do Rio Preto - SP
 						</address>
-						<ul class="list-unstyled list-light">
-							<li>
-								<a href="#">Disclaimer</a>
-							</li>
-						</ul>
+
 					</div>
 					<div class="col-xs-6 col-sm-3">
 						<h4 class="my-2">Repositórios</h4>

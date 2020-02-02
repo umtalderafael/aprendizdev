@@ -1,8 +1,10 @@
 
 <div class="main-w3layouts wrapper">
-	<h1 style="font-size: 25px; font-weight: bold;">
-		<strong>	CADASTRAR </strong>
-	</h1>
+
+	<%=   %>
+
+	<h1 style="font-size: 25px; font-weight: bold;"> CADASTRAR </h1>
+
 	<div class="main-agileinfo">
 		<div class="agileits-top">
 			<%= form_for @user do |f| %>
@@ -15,11 +17,11 @@
 
 				<%= f.number_field :idade , placeholder: "Informe a idade", class: 'input-sign text', :required => true %>
 
-			    <%= f.radio_button :tipo, "dev", :checked => true %>
-			    <%= f.label :tipo, "Desenvolvedor", :value => "dev", class: "label-sign"  %> <br>
+			    <%= f.radio_button :tipo, "Desenvolvedor", :checked => true %>
+			    <%= f.label :tipo, "Desenvolvedor", :value => "Desenvolvedor", class: "label-sign"  %> <br>
 
-			    <%= f.radio_button :tipo, "aprendiz" %> 				    
-			    <%= f.label :tipo, "Aprendiz", :value => "aprendiz", class: "label-sign" %> <br><br>
+			    <%= f.radio_button :tipo, "Aprendiz" %> 				    
+			    <%= f.label :tipo, "Aprendiz", :value => "Aprendiz", class: "label-sign" %> <br><br>
 				
 				<div class="wthree-text">
 					<label class="anim">
