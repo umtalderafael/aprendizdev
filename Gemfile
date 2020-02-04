@@ -36,7 +36,6 @@ gem 'data-confirm-modal'
 
 gem 'launchy', '~> 2.4', '>= 2.4.3'
 
-
 gem 'font-awesome-sass', '~> 5.12.0'
 
 # Use Capistrano for deployment

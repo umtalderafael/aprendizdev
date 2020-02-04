@@ -8,48 +8,14 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <style>
-        .bg-overlay{
-          background: rgba(0,0,0, .7);
-          position: absolute;
-          top: -60px;
-          bottom: -100px;
-          left: 0;
-          right:0;
-          z-index: 0;
-        }
-        video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -100;
-            -moz-transform: translateX(-50%) translateY(-50%);
-            -ms-transform: translateX(-50%) translateY(-50%);
-            -webkit-transform: translateX(-50%) translateY(-50%);
-            transform: translateX(-50%) translateY(-50%);
-            /*background: url(facade.jpg) no-repeat;*/
-            background-size: cover;
-            -webkit-transition: 1s opacity;
-            transition: 1s opacity;
-            z-index: 0;
-        }
-        .ov-hidden{
-          overflow: hidden;
-        }
-      </style>
-
 </head>
 <body>
 
 	<nav class="navbar navbar-light bg-white  navbar-expand-md shadow-sm p-3 bg-white rounded">
     	<div class="container">
-      		<a class="navbar-brand" href="/">
-        		aprendizDEV
-      		</a>
+
+      		<a class="navbar-brand" href="/"> aprendizDEV </a>
+            
       		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav3" aria-controls="navbarNav3" aria-expanded="false" aria-label="Toggle navigation">
         		<span class="navbar-toggler-icon"></span>
       		</button>

@@ -19,6 +19,8 @@ Rails.application.routes.draw do
    post 'login', to: 'sessions#create'   
    get 'authorized', to: 'sessions#page_requires_login'
 
+   get '*path' => redirect('/404')
+
    root to: 'sessions#welcome'
 
 end
