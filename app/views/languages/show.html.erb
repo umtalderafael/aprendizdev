@@ -1,0 +1,15 @@
+<div class="container">
+
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Nome:</strong>
+    <%= @language.nome %>
+  </p>
+
+  <%= link_to 'Editar', edit_language_path(@language) %> |
+  <%= link_to 'Voltar', languages_path %>
+
+
+
+</div>

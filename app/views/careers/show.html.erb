@@ -1,0 +1,14 @@
+<div class="container mt-5">
+
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Nome:</strong>
+    <%= @career.nome %>
+  </p>
+
+  <%= link_to 'Editar', edit_career_path(@career) %> |
+  <%= link_to 'Voltar', careers_path %>
+
+
+</div>

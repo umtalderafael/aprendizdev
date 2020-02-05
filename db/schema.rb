@@ -10,9 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200202225342) do
+ActiveRecord::Schema.define(version: 2020_02_04_182212) do
 
-  create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "careers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nome"
     t.string "email"
     t.string "mensagem"
@@ -20,7 +26,15 @@ ActiveRecord::Schema.define(version: 20200202225342) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "languages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "nome"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "career_id"
+    t.index ["career_id"], name: "index_languages_on_career_id"
+  end
+
+  create_table "locations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "cep"
     t.string "cidade"
     t.string "estado"
@@ -30,7 +44,7 @@ ActiveRecord::Schema.define(version: 20200202225342) do
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
     t.datetime "created_at", null: false
@@ -40,5 +54,6 @@ ActiveRecord::Schema.define(version: 20200202225342) do
     t.integer "idade"
   end
 
+  add_foreign_key "languages", "careers"
   add_foreign_key "locations", "users"
 end

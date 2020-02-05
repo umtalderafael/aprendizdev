@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :careers
+  resources :languages
    resources :users, only: [:index, :new, :create, :destroy]
 
    resources :locations, only: [:new, :create, :get] 
