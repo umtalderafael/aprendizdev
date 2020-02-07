@@ -1,0 +1,77 @@
+<div class="main-content" style="margin-top: 80px">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 m-auto order-xl-1">
+                <div class="card shadow">
+
+                    <%= form_for(@user, :url => "/profile/update") do |f|  %>
+
+                        <div class="card-header border-0">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Complete seu perfil</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <%= f.submit "Salvar", class: "btn btn-sm btn-primary" %>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+
+                            <h6 class="heading-small text-muted mb-4">Seus projetos</h6>
+
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <%= f.text_field :nome , :required => true, :hidden => true %>
+                                    <%= f.number_field :idade , :required => true, :hidden => true %>
+                                    <%= f.text_field :username , :required => true, :hidden => true %>
+                                    <%= f.radio_button :tipo, "Desenvolvedor", :checked => @dev, :hidden => true %>
+                                    <%= f.radio_button :tipo, "Aprendiz", :checked => @aprendiz, :hidden => true %>                     
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-first-name">Repositório / Portifólio </label> <br>
+
+                                            <%= f.text_field :repositorio , placeholder: "Repositório", class: 'form-control form-control-alternative' %>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+  
+                            <hr>
+
+                            <h6 class="heading-small text-muted mb-4">Sobre mim</h6>
+                            <div class="pl-lg-4">
+                                <div class="form-group focused">
+                                    <label>Descrição (500 letras no máximo)</label>
+                                    <%= f.text_area :descricao , cols: 10, rows: 10, class: 'form-control form-control-alternative', :required => true %>
+                                </div>
+                            </div>
+
+                        </div>
+
+                     <%end%> 
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<style type="text/css">
+
+    body {
+        background-color: #f2f2f2;
+    }
+
+</style>

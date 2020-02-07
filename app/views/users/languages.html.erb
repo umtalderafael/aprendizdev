@@ -1,0 +1,48 @@
+<div class="container mt-5">
+
+	<h1>Olá, <%= @user.nome.to_s.split(' ')[0] %></h1>
+	<small><%= descricao(@user) %></small> <br><br>
+
+	<%= form_tag('/users/languages') do -%>
+
+		<p>
+			<h6>Desenvolvedor Front-end</h6>
+			<%= collection_check_boxes(:user, :language_ids, Language.front_end, :id, :nome) do |b| %>
+	   			<label style="margin: 10px;">
+	   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+	   			</label>
+			<% end %>			
+		</p>
+
+		<p>
+			<h6>Desenvolvedor Back-end</h6>
+			<%= collection_check_boxes(:user, :language_ids, @lista_back_end, :id, :nome) do |b| %>
+	   			<label style="margin: 10px;">
+	   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+	   			</label>
+			<% end %>
+		</p>
+
+		<p>
+			<h6>Analista de dados</h6>
+			<%= collection_check_boxes(:user, :language_ids, @lista_analista, :id, :nome) do |b| %>
+	   			<label style="margin: 10px;">
+	   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+	   			</label>
+			<% end %>
+		</p>
+
+		<p>
+			<h6>Desenvolvedor Mobile</h6>
+			<%= collection_check_boxes(:user, :language_ids, @lista_mobile, :id, :nome) do |b| %>
+	   			<label style="margin: 10px;">
+	   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+	   			</label>
+			<% end %>
+		</p>
+
+  		<div><%= submit_tag 'Salvar', class: "btn btn-primary"%></div>
+
+	<% end -%>
+
+</div>

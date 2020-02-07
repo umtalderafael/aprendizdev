@@ -1,0 +1,120 @@
+<div class="container mt-5">
+
+  	<div class="row container-user">
+    	<div class="col-sm-3 img">
+
+    		<a href="/users/<%= session[:user_id] %>/edit">
+      			<img src="<%= avatar(@user) %>"  alt="" class="img-thumbnail rounded" >
+      		</a>
+    	</div>
+    	<div class="col-sm-6 details">
+      		<blockquote>
+      			<br>
+        		<h5>Olá, <%= @user.nome %></h5>
+        		<small>
+        			<cite title="Source Title"> 
+        				<i class="fas fa-map-marker-alt"></i> <%= @user.location.cidade %> - <%= @user.location.estado %>  
+        			</cite>
+        		</small>
+      		</blockquote>
+      		<p>
+        		<%= @user.username %> <br>
+        		<a href="<%= @user.repositorio %>" target="_blank"> <%= @user.repositorio %> </a> <br>
+        		<%= @user.idade %> anos
+      		</p>
+    	</div>
+    </div>
+    <br>
+ 
+	<% if @lista_usuarios.size > 0 %>
+
+		<h5><%= msg_resultado(@user)  %></h5>
+
+    <button class="btn btn-danger">
+    </button> *As linguagens em vermelho são os interesses em comum 
+
+		<br>
+    <br>
+
+		<% @lista_usuarios.each do |u| %>
+
+			<div class="card border-dark mb-3" >
+
+			  	<div class="card-header">
+            <div class="info-box">
+              <div class="thumb">
+                <img src="<%= avatar(u) %>" alt="">
+              </div>
+              <h4 class="name"><%= u.nome %></h4>
+              <span class="designation"><%= u.idade %> anos</span>
+            </div>
+          </div>
+
+			  	<div class="card-body text-dark">
+
+            <% if u.descricao %>
+              <h5 class="card-title">Descrição</h5>
+			    	  <p class="card-text"><%= u.descricao %></p>
+            <% end %>
+
+			    	<h5 class="card-title">Linguagens</h5>
+			    	<p class="card-text">
+
+			    		<% u.languages.each do |linguagem| %>
+
+			    			<% if @linguagens_user.include? linguagem.nome %>
+
+				    			<button class="btn btn-danger">
+				    				<%= linguagem.nome %> 
+				    			</button>
+
+				    		<% else %>
+
+				    			<button class="btn btn-primary active">
+				    				<%= linguagem.nome %> 
+				    			</button>
+
+				    		<% end %>
+
+			    		<% end %>
+
+			    	</p>
+
+			  	</div>
+			</div>
+
+		<% end %>
+
+	<% else %>
+
+		<h3>Nenhum usuário foi encontrado nessa localidade.</h3>
+		<br>
+		<a class="btn btn-primary" href="/locations/<%= session[:user_id] %>/edit">Trocar minha localização</a>  
+
+	<% end %>
+
+	<br>
+	<br>
+	<br>
+	<br>
+
+</div>
+
+<style type="text/css">
+
+	body {
+		background-color: #f2f2f2;
+	}
+	
+	.container-user .img{
+	    text-align:center;
+	}
+	.container-user .details{
+	    border-left:3px solid #ded4da;
+	}
+	.container-user .details p{
+	    font-size:15px;
+	    font-weight:bold;
+	}	
+
+</style>
