@@ -1,28 +1,33 @@
 
-<div class="main-content" style="margin-top: 50px">
+<div class="main-content" style="margin-top: 80px">
     <div class="container">
         
         <div class="row">
+
             <div class="col-xl-8 m-auto order-xl-1">
+
                 <div class="card shadow">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col-8">
-                                <h3 class="mb-0">Minha conta</h3>
-                            </div>
-                            <div class="col-4 text-right">
-                                <a href="#!" class="btn btn-sm btn-primary">SALVAR</a>
+
+                    <%= form_for(@user, :url => "/profile/update") do |f| %>
+
+                        <div class="card-header border-0">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">Minha conta</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <%= f.submit "Salvar", class: "btn btn-sm btn-primary" %>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body">
 
-                        <%= form_for @user do |f| %>
+                        <div class="card-body">
 
                             <h6 class="heading-small text-muted mb-4">Dados de usuário</h6>
 
                             <div class="pl-lg-4">
                                 <div class="row">
+
                                     <div class="col-lg-6">
                                         <div class="form-group focused">
                                             <label class="form-control-label" for="input-username">Nome</label>
@@ -31,6 +36,14 @@
                                      
                                         </div>
                                     </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group focused">
+                                            <label class="form-control-label" for="input-last-name">Idade</label>
+                                            <%= f.number_field :idade , placeholder: "Informe a idade", class: 'form-control form-control-alternative', :required => true %>
+                                        </div>
+                                    </div>
+
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-email">E-mail</label>
@@ -38,45 +51,56 @@
                                             <%= f.text_field :username , placeholder: "Digite o e-mail", class: 'form-control form-control-alternative', :required => true %>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
+
                                     <div class="col-lg-6">
                                         <div class="form-group focused">
                                             <label class="form-control-label" for="input-first-name">Perfil</label> <br>
                                             
                                             <%= f.radio_button :tipo, "Desenvolvedor", :checked => @dev %>
-                                            <%= f.label :tipo, "Desenvolvedor", :value => "Desenvolvedor"  %> <br>
+                                            <%= f.label :tipo, "Desenvolvedor", :value => "Desenvolvedor"  %>  &nbsp;
 
                                             <%= f.radio_button :tipo, "Aprendiz", :checked => @aprendiz %>                     
                                             <%= f.label :tipo, "Aprendiz", :value => "Aprendiz" %> <br><br>
 
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+
+                                </div>
+
+                                <div class="row">
+        
+                                    <div class="col-lg-12">
                                         <div class="form-group focused">
-                                            <label class="form-control-label" for="input-last-name">Idade</label>
-                                            <%= f.number_field :idade , placeholder: "Informe a idade", class: 'form-control form-control-alternative', :required => true %>
+                                            <label class="form-control-label" for="input-first-name">Repositório</label> <br>
+
+                                            <%= f.text_field :repositorio , placeholder: "Repositório", class: 'form-control form-control-alternative' %>
+
                                         </div>
                                     </div>
+
                                 </div>
+
                             </div>
   
-                            <hr class="my-4">
+                            <hr  >
 
                             <!-- Description -->
                             <h6 class="heading-small text-muted mb-4">Sobre mim</h6>
                             <div class="pl-lg-4">
                                 <div class="form-group focused">
                                     <label>Descrição</label>
-                                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+
+                                    <%= f.text_area :descricao , cols: 10, rows: 10, class: 'form-control form-control-alternative', :required => true %>
+
                                 </div>
                             </div>
 
-                        <%end%> 
+                        </div>
 
+                     <%end%> 
 
-                    </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -86,7 +110,6 @@
 <div class="main-content" style="margin-top: 50px;">
     <div class="container">
 
-        <!-- Table -->        
         <div class="row">
             <div class="col-xl-8 m-auto order-xl-1">
                 <div class="card shadow">

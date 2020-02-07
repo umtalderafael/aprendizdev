@@ -38,6 +38,10 @@ gem 'launchy', '~> 2.4', '>= 2.4.3'
 
 gem 'font-awesome-sass', '~> 5.12.0'
 
+gem 'aws-sdk-s3', require: false
+
+gem 'rails-i18n', '~> 5.1'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -46,6 +50,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
+  gem 'awesome_print'
+  gem 'table_print'
   gem 'selenium-webdriver'
 end
 

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
 class Career < ApplicationRecord
-    validates :nome, presence: true
+  has_many :languages
+  validates :nome, presence: true
 end

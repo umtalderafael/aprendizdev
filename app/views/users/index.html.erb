@@ -41,7 +41,11 @@
                     <%= usuario.username %>
                 </td> 
                 <td>    
-                    <%= usuario.location.cidade %> - <%= usuario.location.estado %>
+                    <% if usuario.location %>
+                        <%= usuario.location.cidade %> - <%= usuario.location.estado %>
+                    <% else %>
+                        Não informado
+                    <% end %>
                 </td>                 
                 <td>    
                     <%= usuario.tipo %>

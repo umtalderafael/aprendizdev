@@ -1,6 +1,6 @@
 class LanguagesController < ApplicationController
 
-  skip_before_action :authorized, only: [:index, :new, :create, :show, :edit, :destroy]
+  skip_before_action :authorized, only: [:index, :new, :create, :show, :edit, :destroy, :update]
   before_action :set_language, only: [:show, :edit, :update, :destroy]
 
   # GET /languages

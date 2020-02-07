@@ -727,3 +727,45 @@ input.checkbox:checked:after {
     padding: 1em 0 0;
   }
 }
+
+
+
+.info-box{
+  position: relative;
+  padding-left: 115px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.info-box .thumb{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 82px;
+  width: 82px;
+}
+
+.info-box .thumb img{
+  border: 6px solid #e5e6fa;
+  border-radius: 50%;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  box-shadow: 0 45px 45px rgba(147,147,147,0.35);
+}
+
+.info-box .name{
+  position: relative;
+  display: block;
+  font-size: 21px;
+  font-weight: 700;
+  font-family: "Niramit", sans-serif;
+}
+
+.info-box .designation{
+  position: relative;
+  display: block;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Muli", sans-serif;
+}

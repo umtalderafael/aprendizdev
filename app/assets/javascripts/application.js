@@ -17,3 +17,4 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require data-confirm-modal
+//= require activestorage

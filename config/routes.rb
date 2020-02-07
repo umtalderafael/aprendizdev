@@ -1,28 +1,25 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   resources :careers
   resources :languages
-   resources :users, only: [:index, :new, :create, :destroy]
+  resources :users, only: %i[index new create destroy edit update]
+  resources :locations, only: %i[new create get edit update]
+  resources :contacts, only: %i[index create]
+  resources :profile, only: %i[index update]
 
-   resources :locations, only: [:new, :create, :get] 
+  get 'users/search', to: 'users#search', as: :search_user
+  get 'users/complete', to: 'users#complete'
+  get 'users/languages', to: 'users#languages'
+  post 'users/languages', to: 'users#choiches'
+  get 'users/home', to: 'users#home'
+  delete 'users/:id', to: 'users#destroy'
+  
+  get 'about', to: 'about#index'
+  get 'logout', to: 'sessions#destroy'
+  get 'login', to: 'sessions#login'
+  post 'login', to: 'sessions#create'
+  get 'authorized', to: 'sessions#page_requires_login'
 
-   resources :contacts, only: [:index, :create]
-
-   get "users/search", to: "users#search", as: :search_user 
-
-   delete "users/:id", to: "users#destroy" 
-
-   get 'about', to: 'about#index'   
-   
-   get 'profile', to: 'profile#index'   
-   
-   get 'logout', to: 'sessions#destroy'   
-   get 'login', to: 'sessions#login'
-   post 'login', to: 'sessions#create'   
-   get 'authorized', to: 'sessions#page_requires_login'
-
-   get '*path' => redirect('/404')
-
-   root to: 'sessions#welcome'
-
+  root to: 'sessions#welcome'
 end

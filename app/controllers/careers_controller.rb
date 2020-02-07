@@ -1,5 +1,7 @@
 class CareersController < ApplicationController
-  skip_before_action :authorized, only: [:index, :new, :create, :show, :edit]
+
+  skip_before_action :authorized, only: [:index, :new, :create, :show, :edit, :update]
+  
   before_action :set_career, only: [:show, :edit, :update, :destroy]
 
   # GET /careers

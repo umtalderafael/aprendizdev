@@ -1,23 +1,27 @@
+# frozen_string_literal: true
+
 class ProfileController < ApplicationController
+  skip_before_action :authorized, only: [:index, :update]
 
-	skip_before_action :authorized, only: [:index]
+  def index
+    @user = User.find_by_id(session[:user_id])
+    if @user.tipo == 'Desenvolvedor'
+      @dev = true
+      @aprendiz = false
+    else
+      @dev = false
+      @aprendiz = true
+    end
+  end
 
-	def index
-		@user = User.find_by_id(session[:user_id])
+  def update
+    user = User.find_by_id(session[:user_id])
+    if user.update params.require(:user).permit(:descricao, :repositorio)
+      redirect_to '/users/home'
+    else
+      
+    end
 
-		if @user.tipo == "Desenvolvedor"
-			@dev = true
-			@aprendiz = false
-		else
-			@dev = false
-			@aprendiz = true
-		end
-
-		@location = Location.new
-		@location.cep = @user.location.cep
-		@location.cidade = @user.location.cidade
-		@location.estado = @user.location.estado
-
-	end	
+  end
 
 end
