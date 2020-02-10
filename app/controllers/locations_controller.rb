@@ -12,7 +12,7 @@ class LocationsController < ApplicationController
     valores['user_id'] = session[:user_id]
     location = Location.create(valores)
     session[:location_id] = location.id
-    redirect_to '/users/languages'
+    redirect_to '/users/languages?t=new'
   end
 
   def edit

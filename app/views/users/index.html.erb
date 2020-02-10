@@ -1,6 +1,7 @@
 <div class="container" style="margin-top: 50px;">
 
     <h1>Usuários</h1>
+    <br>
 
     <% if flash[:notice] %>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,7 +19,7 @@
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
-                <th>Idade</th>
+                <th>Nascimento</th>
                 <th>E-mail</th>       
                 <th>Localização</th>       
                 <th>Tipo</th>
@@ -35,7 +36,7 @@
                     <%= usuario.nome %>
                 </td>
                 <td>    
-                    <%= usuario.idade %>
+                    <%= age(usuario.nascimento) %>
                 </td>
                 <td>    
                     <%= usuario.username %>
@@ -57,6 +58,7 @@
             <% end %>
         </tbody>
     </table>
+
+    <%= paginate @users %>
   
-    
 </div> 

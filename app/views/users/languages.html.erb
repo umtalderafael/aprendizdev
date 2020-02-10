@@ -3,46 +3,83 @@
 	<h1>Olá, <%= @user.nome.to_s.split(' ')[0] %></h1>
 	<small><%= descricao(@user) %></small> <br><br>
 
+
 	<%= form_tag('/users/languages') do -%>
 
-		<p>
-			<h6>Desenvolvedor Front-end</h6>
-			<%= collection_check_boxes(:user, :language_ids, Language.front_end, :id, :nome) do |b| %>
-	   			<label style="margin: 10px;">
-	   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
-	   			</label>
-			<% end %>			
-		</p>
+		<input type="text" name="pagina" value="<%=@pagina%>" hidden>
 
-		<p>
-			<h6>Desenvolvedor Back-end</h6>
-			<%= collection_check_boxes(:user, :language_ids, @lista_back_end, :id, :nome) do |b| %>
-	   			<label style="margin: 10px;">
-	   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
-	   			</label>
-			<% end %>
-		</p>
+		<div class="card">
+		  <h5 class="card-header">Desenvolvedor Front-end</h5>
+		  <div class="card-body">
+		    <p class="card-text">Esse profissional além de conhecer tecnologias de formatação e estilo também precisa conhecer programas de edição de imagens e ilustrações como Photoshop e Corel Draw.</p>
+		    <p>
+					<%= collection_check_boxes(:user, :language_ids, Language.front_end, :id, :nome) do |b| %>
+			   			<label style="margin: 5px;">
+			   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+			   			</label>
+					<% end %>		
+		    </p>
+		  </div>
+		</div>
 
-		<p>
-			<h6>Analista de dados</h6>
-			<%= collection_check_boxes(:user, :language_ids, @lista_analista, :id, :nome) do |b| %>
-	   			<label style="margin: 10px;">
-	   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
-	   			</label>
-			<% end %>
-		</p>
+		<div class="card mt-3">
+		  <h5 class="card-header">Desenvolvedor Back-end</h5>
+		  <div class="card-body">
+		    <p class="card-text">É o profissional que programa as regras de negócio dos sistemas a aplicações e faz as relações com o banco de dados.</p>
+		    <p>
+					<%= collection_check_boxes(:user, :language_ids, @lista_back_end, :id, :nome) do |b| %>
+			   			<label style="margin: 5px;">
+			   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+			   			</label>
+					<% end %>
+		    </p>
+		  </div>
+		</div>
 
-		<p>
-			<h6>Desenvolvedor Mobile</h6>
-			<%= collection_check_boxes(:user, :language_ids, @lista_mobile, :id, :nome) do |b| %>
-	   			<label style="margin: 10px;">
-	   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
-	   			</label>
-			<% end %>
-		</p>
+		<div class="card mt-3">
+		  <h5 class="card-header">Analista de dados</h5>
+		  <div class="card-body">
+		    <p class="card-text">É o programador que trabalha com dados, seja através de linguagens de banco como também com analise de dados e estatistica.</p>
+		    <p>
+					<%= collection_check_boxes(:user, :language_ids, @lista_analista, :id, :nome) do |b| %>
+			   			<label style="margin: 5px;">
+			   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+			   			</label>
+					<% end %>
+		    </p>
+		  </div>
+		</div>
 
-  		<div><%= submit_tag 'Salvar', class: "btn btn-primary"%></div>
+		<div class="card mt-3">
+		  <h5 class="card-header">Desenvolvedor Mobile</h5>
+		  <div class="card-body">
+		    <p class="card-text">É o profissional que desenvolve aplicativos para celular, podendo ser desenvolvimento nativo e também através de ferramentas que geram aplicativos multiplataformas.</p>
+		    <p>
+					<%= collection_check_boxes(:user, :language_ids, @lista_mobile, :id, :nome) do |b| %>
+			   			<label style="margin: 5px;">
+			   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+			   			</label>
+					<% end %>
+		    </p>
+		  </div>
+		</div>
+
+		<br>
+
+  	<%= submit_tag 'Salvar', class: "btn btn-primary"%>
+
+  	<br>
+  	<br>
+  	<br>
 
 	<% end -%>
 
 </div>
+
+<style type="text/css">
+
+    body {
+        background-color: #f2f2f2;
+    }
+
+</style>

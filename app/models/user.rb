@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_one :location
   has_and_belongs_to_many :languages
   has_one_attached :avatar
+  paginates_per 10
 
   scope :lista_usuarios, -> (user, tipo) { joins(:location).where("locations.cidade = '#{user.location.cidade}' AND locations.estado = '#{user.location.estado}' AND users.tipo = '#{tipo}' ") }
 
@@ -24,7 +25,16 @@ class User < ApplicationRecord
     location.size > 0
   end
 
-  def languages_name_array
-    languages&.map(&:nome)
+  def tem_avatar?
+    if avatar.attached?
+      return true
+    else
+      return false
+    end
   end
+
+  def languages_id_array
+    languages&.map(&:id)
+  end
+
 end

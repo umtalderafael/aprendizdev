@@ -23,19 +23,11 @@
 
                             <div class="pl-lg-4">
                                 <div class="row">
-                                    <%= f.text_field :nome , :required => true, :hidden => true %>
-                                    <%= f.number_field :idade , :required => true, :hidden => true %>
-                                    <%= f.text_field :username , :required => true, :hidden => true %>
-                                    <%= f.radio_button :tipo, "Desenvolvedor", :checked => @dev, :hidden => true %>
-                                    <%= f.radio_button :tipo, "Aprendiz", :checked => @aprendiz, :hidden => true %>                     
-                                </div>
-
-                                <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group focused">
                                             <label class="form-control-label" for="input-first-name">Repositório / Portifólio </label> <br>
 
-                                            <%= f.text_field :repositorio , placeholder: "Repositório", class: 'form-control form-control-alternative' %>
+                                            <%= f.url_field :repositorio , placeholder: "Repositório", class: 'form-control form-control-alternative' %>
 
                                         </div>
                                     </div>

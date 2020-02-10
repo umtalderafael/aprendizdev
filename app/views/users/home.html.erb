@@ -20,7 +20,7 @@
       		<p>
         		<%= @user.username %> <br>
         		<a href="<%= @user.repositorio %>" target="_blank"> <%= @user.repositorio %> </a> <br>
-        		<%= @user.idade %> anos
+        		<%= age(@user.nascimento) %> anos
       		</p>
     	</div>
     </div>
@@ -36,17 +36,39 @@
 		<br>
     <br>
 
+    <%= paginate @lista_usuarios %>
+
+    <br>
+
 		<% @lista_usuarios.each do |u| %>
 
-			<div class="card border-dark mb-3" >
+			<div class="card border-dark mb-5 shadow-lg rounded" >
 
 			  	<div class="card-header">
-            <div class="info-box">
+            <div class="info-box float-left">
               <div class="thumb">
-                <img src="<%= avatar(u) %>" alt="">
+                <img src="<%= avatar(u) %>" alt="Avatar" class="rounded">
               </div>
               <h4 class="name"><%= u.nome %></h4>
-              <span class="designation"><%= u.idade %> anos</span>
+              <span class="designation"><%= age(u.nascimento) %> anos</span>
+            </div>
+
+            <div class="float-right">
+
+              <% if @user.dev? %>
+
+                <button class="btn btn-primary">
+                  <i class="fas fa-hands-helping"></i> Quero ajudar
+                </button>
+
+              <% else %>
+
+                <button class="btn btn-primary">
+                  <i class="far fa-question-circle"></i> Solicitar ajuda
+                </button>
+
+              <% end %>
+              
             </div>
           </div>
 
@@ -62,15 +84,15 @@
 
 			    		<% u.languages.each do |linguagem| %>
 
-			    			<% if @linguagens_user.include? linguagem.nome %>
+			    			<% if @linguagens_user.include? linguagem.id %>
 
-				    			<button class="btn btn-danger">
+				    			<button class="btn btn-outline-danger">
 				    				<%= linguagem.nome %> 
 				    			</button>
 
 				    		<% else %>
 
-				    			<button class="btn btn-primary active">
+				    			<button class="btn btn-outline-primary">
 				    				<%= linguagem.nome %> 
 				    			</button>
 
@@ -92,6 +114,8 @@
 		<a class="btn btn-primary" href="/locations/<%= session[:user_id] %>/edit">Trocar minha localização</a>  
 
 	<% end %>
+
+  <%= paginate @lista_usuarios %>
 
 	<br>
 	<br>

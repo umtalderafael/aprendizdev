@@ -34,15 +34,15 @@
                             <div class="pl-lg-4">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <div class="form-group focused">
+                                        <div class="form-group">
                                             <label class="form-control-label" for="input-username">Nome</label>
                                             <%= f.text_field :nome , placeholder: "Digite seu nome", class: 'form-control form-control-alternative', :required => true %>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <div class="form-group focused">
-                                            <label class="form-control-label" for="input-last-name">Idade</label>
-                                            <%= f.number_field :idade , placeholder: "Informe a idade", class: 'form-control form-control-alternative', :required => true %>
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-last-name">Nascimento</label>
+                                            <%= f.date_field(:nascimento, class: "form-control form-control-alternative", type: "Date") %>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -52,23 +52,39 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
-                                        <div class="form-group focused">
+                                        <div class="form-group">
                                             <label class="form-control-label" for="input-first-name">Perfil</label> <br>
                                             <%= f.radio_button :tipo, "Desenvolvedor", :checked => @dev %>
                                             <%= f.label :tipo, "Desenvolvedor", :value => "Desenvolvedor"  %>  &nbsp;
                                             <%= f.radio_button :tipo, "Aprendiz", :checked => @aprendiz %>                     
-                                            <%= f.label :tipo, "Aprendiz", :value => "Aprendiz" %> <br><br>
+                                            <%= f.label :tipo, "Aprendiz", :value => "Aprendiz" %> <br>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="form-group focused">
+                                        <div class="form-group">
                                             <label class="form-control-label" for="input-first-name">Repositório</label> <br>
                                             <%= f.text_field :repositorio , placeholder: "Repositório", class: 'form-control form-control-alternative' %>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                        <div class="form-group">
+                                            <label>Imagem do perfil</label><br>
+                                            <a href="<%= avatar(@user) %>" target="_blank">
+                                                <img src="<%= avatar(@user) %>" class="rounded img-thumbnail" style="max-width: 150px;"> 
+                                                <br><br>
+                                                <%= f.file_field :avatar, class: "form-control-file"  %>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
   
                             <hr>
@@ -77,11 +93,10 @@
                             <div class="pl-lg-4">
                                 <div class="form-group focused">
                                     <label>Descrição</label>
-
                                     <%= f.text_area :descricao , cols: 10, rows: 10, class: 'form-control form-control-alternative', :required => true %>
-
                                 </div>
                             </div>
+
                         </div>
 
                      <%end%> 
@@ -92,11 +107,11 @@
     </div>
 </div>
  
- <br>
- <br>
- <br>
- <br>
- <br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <style type="text/css">
 

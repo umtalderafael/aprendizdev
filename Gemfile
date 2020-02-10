@@ -42,6 +42,8 @@ gem 'aws-sdk-s3', require: false
 
 gem 'rails-i18n', '~> 5.1'
 
+gem 'kaminari'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

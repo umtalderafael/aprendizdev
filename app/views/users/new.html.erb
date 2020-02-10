@@ -6,14 +6,22 @@
 		<div class="agileits-top">
 			<%= form_for @user do |f| %>
 
-				<%= f.text_field :nome , placeholder: "Digite seu nome", class: 'input-sign text', :required => true %>
+				<div class="form-group">
+					<%= f.text_field :nome , placeholder: "Digite seu nome", class: 'form-control', :required => true %>
+				</div>
 
-				<%= f.text_field :username , placeholder: "Digite o e-mail", class: 'input-sign text', :required => true %>
+				<div class="form-group">
+					<%= f.email_field :username , placeholder: "Digite seu e-mail", class: 'form-control', :required => true %>
+				</div>
 
-				<%= f.password_field :password , placeholder: "Digite a senha", class: 'input-sign text', :required => true %>
+				<div class="form-group">
+					<%= f.password_field :password , placeholder: "Digite a senha", class: 'form-control', :required => true %>
+				</div>
 
-				<label style="color: white;">Nascimento</label> <br>
-				<%= f.date_field(:nascimento) %> <br><br>
+				<label style="color: white;">Data de nascimento</label> <br>
+				<%= f.date_field(:nascimento, class: "date form-control", type: "Date") %> <br>
+
+				<label style="color: white;">Nível de conhecimento</label> <br>
 
 			    <%= f.radio_button :tipo, "Desenvolvedor", :checked => true %>
 			    <%= f.label :tipo, "Desenvolvedor", :value => "Desenvolvedor", class: "label-sign"  %>  &nbsp;
@@ -25,8 +33,7 @@
 			    	<label style="color: white;">Imagem do perfil</label>
 			    	<%= f.file_field :avatar, class: "form-control-file"  %>
 			  	</div>
-
-			  	<br><br>
+			  	<br>
 
 				<div class="wthree-text">
 					<label class="anim">

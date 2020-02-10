@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   skip_before_action :authorized, only: %i[index new create destroy languages choiches home edit update complete]
 
   def index
-    @users = User.includes(:location).all
+    @users = User.includes(:location).page(params[:page])
   end
 
   def new
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       redirect_to '/'
     else
       if params.key?(:user)
-        @user = User.new(params_user_new)
+        @user = User.new(params_user)
       else
         @user = User.new
       end
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(params_user_create)
+    user = User.new(params_user)
     user.save!
     session[:user_id] = user.id
     redirect_to '/locations/new'
@@ -46,32 +46,64 @@ class UsersController < ApplicationController
     @user = User.find(id)
     @dev = @user.dev?
     @aprendiz = @user.aprendiz?
-    if @user.update params_user_update
-        flash[:notice] = "Usuario atualizado com sucesso!"
+    valores = params_user
+
+    if valores['avatar']
+      if @user.tem_avatar?
+        @user.avatar.purge 
+      end
+    end
+
+    if @user.update params_user
+        flash.now[:notice] = "Usuario atualizado com sucesso!"
     else
-        flash[:notice] = "Erro ao atualizar o usuário!"
+        flash.now[:notice] = "Erro ao atualizar o usuário!"
     end 
+
     render :profile
   end
 
   def languages
     @user = User.find(session[:user_id])
+
     @lista_front_end = Language.front_end
     @lista_back_end = Language.back_end
     @lista_analista = Language.analista
     @lista_mobile = Language.mobile
+
+    @pagina = params[:t]
   end
 
   def choiches
+
+    @user = User.find(session[:user_id])
+
     escolhas = params.require(:user).permit(language_ids: [])
-    user = User.find(session[:user_id])
+
+    linguagens_usuario = @user.languages_id_array
+    linguagens_escolhidas = []
+
     escolhas['language_ids'].each do |e|
       unless e.empty?
+        linguagens_escolhidas.push(Integer(e))
         linguagem = Language.find(e)
-        user.languages << linguagem unless user.languages.include?(linguagem)
+        @user.languages << linguagem unless @user.languages.include?(linguagem)
       end
     end
-    redirect_to '/users/complete'
+
+    desmarcadas = linguagens_usuario - linguagens_escolhidas
+
+    desmarcadas.each do |d|
+      apagar = @user.languages.find(d)
+      @user.languages.delete(apagar)
+    end
+
+    if params[:pagina] == 'new'
+      redirect_to '/users/complete'
+    else
+      redirect_to '/users/home'
+    end
+
   end
 
   def complete
@@ -80,14 +112,15 @@ class UsersController < ApplicationController
     @aprendiz = @user.aprendiz?
   end
 
-  def home
+  def home 
     @user = User.find(session[:user_id])
+
     if @user.aprendiz?
-      @lista_usuarios = User.lista_usuarios(@user, 'Desenvolvedor')
+      @lista_usuarios = User.lista_usuarios(@user, 'Desenvolvedor').page(params[:page]).per(5)
     else  
-      @lista_usuarios = User.lista_usuarios(@user, 'Aprendiz')
+      @lista_usuarios = User.lista_usuarios(@user, 'Aprendiz').page(params[:page]).per(5)
     end
-    @linguagens_user = @user.languages_name_array
+    @linguagens_user = @user.languages_id_array
   end
 
   def busca
@@ -95,16 +128,8 @@ class UsersController < ApplicationController
     @users = User.where 'nome like ?', "%#{@nome}%"
   end
 
-  def params_user_create
-    params.require(:user).permit(:nome, :username, :password, :tipo, :idade, :avatar)
-  end
-
-  def params_user_update
-    params.require(:user).permit(:nome, :username, :password, :tipo, :idade, :descricao, :repositorio)
-  end
-
-  def params_user_new
-    params.require(:user).permit(:nome, :username, :tipo)
+  def params_user
+    params.require(:user).permit(:nome, :username, :password, :tipo, :nascimento, :avatar, :descricao, :repositorio, avatar_attachment_attributes: [:id, :_destroy])
   end
 
 end
