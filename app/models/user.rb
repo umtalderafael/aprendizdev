@@ -3,7 +3,9 @@
 class User < ApplicationRecord
   has_secure_password
   has_one :location
+  has_many :posts
   has_and_belongs_to_many :languages
+  has_and_belongs_to_many :classrooms
   has_one_attached :avatar
   paginates_per 10
 

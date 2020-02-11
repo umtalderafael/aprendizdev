@@ -1,0 +1,225 @@
+<div class="container mt-5">
+  <center>
+    <h3><%= @sala.nome %></h3>
+  </center> 
+</div>
+
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+            <div class="mainflip">
+                <div class="frontside">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <p><img class=" img-fluid" src="<%= avatar(@dev) %>" alt="card image"></p>
+                            <h4 class="card-title">Desenvolvedor</h4>
+
+                            <p class="card-text">
+                                <%= @dev.nome %> <br>
+                                <%= age(@dev.nascimento) %> anos
+                            </p>
+
+                            <p class="card-text">
+                              <% @dev.languages.each do |linguagem| %>
+                                  <button class="btn btn-sm btn-outline-primary">
+                                    <%= linguagem.nome %> 
+                                  </button>
+                              <% end %>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="backside">
+                    <div class="card">
+                        <div class="card-body text-center mt-4">
+                            <h4 class="card-title">Descrição</h4>
+                            <p class="card-text"><%= @dev.descricao %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+            <div class="mainflip">
+                <div class="frontside">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <p><img class=" img-fluid" src="<%= avatar(@aprendiz) %>" alt="card image"></p>
+                            <h4 class="card-title">Aprendiz</h4>
+                            
+                            <p class="card-text">
+                              <%= @aprendiz.nome %> <br>
+                              <%= age(@aprendiz.nascimento) %> anos
+                            </p>
+
+                            <p class="card-text">
+                              <% @aprendiz.languages.each do |linguagem| %>
+                                  <button class="btn btn-sm btn-outline-primary">
+                                    <%= linguagem.nome %> 
+                                  </button>
+                              <% end %>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="backside">
+                    <div class="card">
+                        <div class="card-body text-center mt-4">
+                            <h4 class="card-title">Descrição</h4>
+                            <p class="card-text"> <%= @aprendiz.descricao %> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-sm">
+
+      <%= form_tag('/posts') do -%>
+
+        <input type="text" name="post[classroom_id]" value="<%= @sala.id %>" hidden>
+        <input type="text" name="post[user_id]" value="<%= @user.id %>" hidden>
+
+        <center>
+          <button class="btn btn-primary btn-lg" type="submit">
+            <i class="far fa-edit"></i> Nova postagem
+          </button>        
+        </center>
+
+      <% end -%>
+
+    </div>
+  </div>
+</div>
+
+
+<style type="text/css">
+    
+  body {
+    background-color: #f2f2f2;
+  }
+
+  #team {
+      background: #eee !important;
+  }
+
+  .img-fluid {
+    border: 0.5px solid grey;
+  }
+
+  section {
+      padding: 60px 0;
+  }
+
+  section .section-title {
+      text-align: center;
+      
+      margin-bottom: 50px;
+      text-transform: uppercase;
+  }
+
+  #team .card {
+      border: none;
+      background: #ffffff;
+  }
+
+  .image-flip:hover .backside,
+  .image-flip.hover .backside {
+      -webkit-transform: rotateY(0deg);
+      -moz-transform: rotateY(0deg);
+      -o-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+      border-radius: .25rem;
+  }
+
+  .image-flip:hover .frontside,
+  .image-flip.hover .frontside {
+      -webkit-transform: rotateY(180deg);
+      -moz-transform: rotateY(180deg);
+      -o-transform: rotateY(180deg);
+      transform: rotateY(180deg);
+  }
+
+  .mainflip {
+      -webkit-transition: 1s;
+      -webkit-transform-style: preserve-3d;
+      -ms-transition: 1s;
+      -moz-transition: 1s;
+      -moz-transform: perspective(1000px);
+      -moz-transform-style: preserve-3d;
+      -ms-transform-style: preserve-3d;
+      transition: 1s;
+      transform-style: preserve-3d;
+      position: relative;
+  }
+
+  .frontside {
+      position: relative;
+      -webkit-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      z-index: 2;
+      margin-bottom: 30px;
+  }
+
+  .backside {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: white;
+      -webkit-transform: rotateY(-180deg);
+      -moz-transform: rotateY(-180deg);
+      -o-transform: rotateY(-180deg);
+      -ms-transform: rotateY(-180deg);
+      transform: rotateY(-180deg);
+      -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+      -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+      box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+  }
+
+  .frontside,
+  .backside {
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transition: 1s;
+      -webkit-transform-style: preserve-3d;
+      -moz-transition: 1s;
+      -moz-transform-style: preserve-3d;
+      -o-transition: 1s;
+      -o-transform-style: preserve-3d;
+      -ms-transition: 1s;
+      -ms-transform-style: preserve-3d;
+      transition: 1s;
+      transform-style: preserve-3d;
+  }
+
+  .frontside .card,
+  .backside .card {
+      min-height: 312px;
+  }
+
+  .backside .card a {
+      font-size: 18px;
+  }
+
+  .frontside .card .card-body img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+  }
+
+</style>
+

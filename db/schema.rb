@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_10_114642) do
+ActiveRecord::Schema.define(version: 2020_02_11_204330) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -37,6 +37,25 @@ ActiveRecord::Schema.define(version: 2020_02_10_114642) do
     t.string "nome"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "classrooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.boolean "ativa", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "nome"
+  end
+
+  create_table "classrooms_posts", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "classroom_id", null: false
+    t.bigint "post_id", null: false
+    t.index ["classroom_id", "post_id"], name: "index_classrooms_posts_on_classroom_id_and_post_id"
+  end
+
+  create_table "classrooms_users", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "classroom_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["classroom_id", "user_id"], name: "index_classrooms_users_on_classroom_id_and_user_id"
   end
 
   create_table "contacts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -71,6 +90,16 @@ ActiveRecord::Schema.define(version: 2020_02_10_114642) do
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
+  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "nome"
+    t.string "string"
+    t.text "texto"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -89,4 +118,5 @@ ActiveRecord::Schema.define(version: 2020_02_10_114642) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "languages", "careers"
   add_foreign_key "locations", "users"
+  add_foreign_key "posts", "users"
 end

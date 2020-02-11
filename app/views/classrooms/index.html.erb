@@ -1,0 +1,53 @@
+<div class="container mt-5">
+
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong> <%= notice %> </strong>  
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+
+  <h3>Salas de aula</h3>
+  <br>
+
+  <table class="table table-condensed table-hover">   
+      <thead>
+          <tr>
+              <th>Nome</th>
+              <th>Status</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>     
+          <% @user.classrooms.each do |sala| %>
+          <tr>
+              <td>
+                <%= link_to(sala) do %>
+                  <strong><%= sala.nome %></strong>  
+                <% end %>
+              </td>
+              <td>    
+                  <% if sala.ativa %>
+                    <i class="far fa-thumbs-up"></i> Ativa
+                  <% else %>
+                    <i class="far fa-thumbs-down"></i> Inativa
+                  <% end %>
+              </td>
+              <td>
+                  <% if sala.ativa %>
+                    <%= button_to "Desativar", { action: "status", id: sala.id }, class: "btn btn-danger btn-sm", data: {title: "Atenção!", confirm: 'Tem certeza que deseja desativar?', commit: 'Desativar', cancel: "Cancelar"}  %>
+                  <% else %>
+                    <%= button_to "Ativar", { action: "status", id: sala.id }, class: "btn btn-success btn-sm", data: {title: "Atenção!", confirm: 'Tem certeza que deseja ativar?', commit: 'Ativar', cancel: "Cancelar"}   %>
+                  <% end %>
+              </td>
+          </tr>
+          <% end %>
+      </tbody>
+  </table>
+
+  <br>
+  <br>
+
+</div>

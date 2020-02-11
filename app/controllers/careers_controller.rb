@@ -4,28 +4,20 @@ class CareersController < ApplicationController
   
   before_action :set_career, only: [:show, :edit, :update, :destroy]
 
-  # GET /careers
-  # GET /careers.json
   def index
     @careers = Career.all
   end
 
-  # GET /careers/1
-  # GET /careers/1.json
   def show
   end
 
-  # GET /careers/new
   def new
     @career = Career.new
   end
 
-  # GET /careers/1/edit
   def edit
   end
 
-  # POST /careers
-  # POST /careers.json
   def create
     @career = Career.new(career_params)
 
@@ -40,8 +32,6 @@ class CareersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /careers/1
-  # PATCH/PUT /careers/1.json
   def update
     respond_to do |format|
       if @career.update(career_params)
@@ -54,8 +44,6 @@ class CareersController < ApplicationController
     end
   end
 
-  # DELETE /careers/1
-  # DELETE /careers/1.json
   def destroy
     @career.destroy
     respond_to do |format|
@@ -65,12 +53,10 @@ class CareersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_career
       @career = Career.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def career_params
       params.require(:career).permit(:nome)
     end

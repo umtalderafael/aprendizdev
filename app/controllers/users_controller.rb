@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   skip_before_action :authorized, only: %i[index new create destroy languages choiches home edit update complete]
 
   def index
-    @users = User.includes(:location).page(params[:page])
+    @pagy, @users = pagy(User.includes(:location))
   end
 
   def new
@@ -116,9 +116,9 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
 
     if @user.aprendiz?
-      @lista_usuarios = User.lista_usuarios(@user, 'Desenvolvedor').page(params[:page]).per(5)
+      @pagy, @lista_usuarios = pagy(User.lista_usuarios(@user, 'Desenvolvedor'), items: 5)
     else  
-      @lista_usuarios = User.lista_usuarios(@user, 'Aprendiz').page(params[:page]).per(5)
+      @pagy, @lista_usuarios = pagy(User.lista_usuarios(@user, 'Aprendiz'), items: 5)
     end
     @linguagens_user = @user.languages_id_array
   end
