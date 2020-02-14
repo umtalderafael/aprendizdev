@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   resources :contacts, only: %i[index create]
   resources :profile, only: %i[index update]
 
+
+  get 'users/test', to: 'users#test'
+
+
+
   post 'classrooms/status', to: 'classrooms#status'
   get 'users/search', to: 'users#search', as: :search_user
   get 'users/complete', to: 'users#complete'

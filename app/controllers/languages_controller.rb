@@ -1,29 +1,31 @@
-class LanguagesController < ApplicationController
+# frozen_string_literal: true
 
-  skip_before_action :authorized, only: [:index, :new, :create, :show, :edit, :destroy, :update]
-  before_action :set_language, only: [:show, :edit, :update, :destroy]
+class LanguagesController < ApplicationController
+  skip_before_action :authorized, only: %i[index new create show edit destroy update]
+  before_action :set_language, only: %i[show edit update destroy]
 
   def index
-    @languages = Language.all
+    @languages = Language.order(id: :desc)
+    @language = Language.new
+    @careers = Career.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @language = Language.new
     @careers = Career.all
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @language = Language.new(language_params)
 
     respond_to do |format|
       if @language.save
-        format.html { redirect_to "/languages", notice: 'Linguagem criada com sucesso.' }
+        format.js 
+        format.html { redirect_to '/languages', notice: 'Linguagem criada com sucesso.' }
         format.json { render :show, status: :created, location: @language }
       else
         format.html { render :new }
@@ -49,15 +51,17 @@ class LanguagesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to languages_url, notice: 'Linguagem removida com sucesso.' }
       format.json { head :no_content }
+      format.js   
     end
   end
 
   private
-    def set_language
-      @language = Language.find(params[:id])
-    end
 
-    def language_params
-      params.require(:language).permit(:nome, :career_id)
-    end
+  def set_language
+    @language = Language.find(params[:id])
+  end
+
+  def language_params
+    params.require(:language).permit(:nome, :career_id)
+  end
 end

@@ -11,4 +11,5 @@ class Language < ApplicationRecord
   scope :analista, -> { joins(:career).where("careers.nome = 'Analista de dados'") }
   scope :mobile, -> { joins(:career).where("careers.nome = 'Desenvolvedor mobile'") }
 
+
 end

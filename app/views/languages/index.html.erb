@@ -11,13 +11,18 @@
 
   <h1>
     Linguagens
-    <div class="float-right">
-      <%= link_to 'Nova Linguagem', new_language_path, class: "btn btn-primary"%>
+    <div class="float-right" >
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCadastro">
+        Nova linguagem
+      </button>
+
     </div>
+    
   </h1>
   <br>
 
-  <table class="table table-condensed table-border table-hover">
+  <table class="table table-condensed table-border table-hover" id="languages">
     <thead>
       <tr>
         <th>Nome</th>
@@ -27,18 +32,25 @@
     </thead>
 
     <tbody>
-      <% @languages.each do |language| %>
-        <tr>
-          <td><%= language.nome %></td>
-          <td><%= language.career.nome %></td>
-          <td><%= link_to 'Ver', language %></td>
-          <td><%= link_to 'Editar', edit_language_path(language) %></td>
-          <td>
-            <%= button_to "Remover", language, method: :delete, class: "btn btn-danger btn-sm", data: {title: "Atenção!", confirm: 'Tem certeza que deseja apagar?', commit: 'Apagar', cancel: "Cancelar"}   %>  
-          </td>
-        </tr>
-      <% end %>
+      <%= render @languages %>
     </tbody>
   </table>
 
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="modalCadastroLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCadastroLabel">Cadastrar nova linguagem</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <%= render partial: "form", locals: { language: @language } %>
+      </div>
+    </div>
+  </div>
 </div>

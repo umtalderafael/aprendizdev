@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
 
-  skip_before_action :authorized, only: %i[index new create destroy languages choiches home edit update complete]
+  skip_before_action :authorized, only: %i[index new create destroy languages choiches home edit update complete test]
 
   def index
     @pagy, @users = pagy(User.includes(:location))
@@ -63,6 +63,29 @@ class UsersController < ApplicationController
     render :profile
   end
 
+  def quantidade
+
+    quantidade = ActiveRecord::Base.connection.select_one "SELECT count(*) as total FROM languages_users where language_id = 1"
+
+    @total = quantidade['total']
+
+  end
+
+
+
+  def test
+    some_parameter = params[:some_parameter]
+    # do something with some_parameter and return the results
+
+    @test= 'fdgdfgfdhfdhfdhfdh'
+
+    respond_to do |format|
+      format.js {render json: @test}
+    end
+  end
+
+
+
   def languages
     @user = User.find(session[:user_id])
 
@@ -70,6 +93,9 @@ class UsersController < ApplicationController
     @lista_back_end = Language.back_end
     @lista_analista = Language.analista
     @lista_mobile = Language.mobile
+
+
+
 
     @pagina = params[:t]
   end

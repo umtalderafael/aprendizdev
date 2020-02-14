@@ -1,0 +1,9 @@
+<tr id="language-<%=language.id%>">
+  <td><%= language.nome %></td>
+  <td><%= language.career.nome %></td>
+  <td><%= link_to 'Ver', language %></td>
+  <td><%= link_to 'Editar', edit_language_path(language) %></td>
+  <td>
+    <%= button_to "Remover", language,  remote: true, method: :delete, class: "btn btn-danger btn-sm", data: {title: "Atenção!", confirm: 'Tem certeza que deseja apagar?', commit: 'Apagar', cancel: "Cancelar"}   %>  
+  </td>
+</tr>
