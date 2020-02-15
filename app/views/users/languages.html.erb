@@ -1,6 +1,6 @@
 <div class="container mt-5">
 
-	<h1>Olá, <%= @user.nome.to_s.split(' ')[0] %></h1>
+	<h2>Olá, <%= @user.nome.to_s.split(' ')[0] %></h2>
 	<small><%= descricao(@user) %></small> <br><br>
 
 	<%= form_tag('/users/languages') do -%>
@@ -12,11 +12,11 @@
 		  <div class="card-body">
 		    <p class="card-text">Esse profissional além de conhecer tecnologias de formatação e estilo também precisa conhecer programas de edição de imagens e ilustrações como Photoshop e Corel Draw.</p>
 		    <p>
-					<%= collection_check_boxes(:user, :language_ids, Language.front_end, :id, :nome) do |b| %>
-			   			<label style="margin: 5px;">
-			   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
-			   			</label>
-					<% end %>		
+				<%= collection_check_boxes(:user, :language_ids, Language.front_end, :id, :nome) do |b| %>
+		   			<label style="margin: 5px;">
+		   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+		   			</label>
+				<% end %>		
 		    </p>
 		  </div>
 		</div>
@@ -26,11 +26,11 @@
 		  <div class="card-body">
 		    <p class="card-text">É o profissional que programa as regras de negócio dos sistemas a aplicações e faz as relações com o banco de dados.</p>
 		    <p>
-					<%= collection_check_boxes(:user, :language_ids, @lista_back_end, :id, :nome) do |b| %>
-			   			<label style="margin: 5px;">
-			   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
-			   			</label>
-					<% end %>
+				<%= collection_check_boxes(:user, :language_ids, @lista_back_end, :id, :nome) do |b| %>
+		   			<label style="margin: 5px;">
+		   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+		   			</label>
+				<% end %>
 		    </p>
 		  </div>
 		</div>
@@ -40,11 +40,11 @@
 		  <div class="card-body">
 		    <p class="card-text">É o programador que trabalha com dados, seja através de linguagens de banco como também com analise de dados e estatistica.</p>
 		    <p>
-					<%= collection_check_boxes(:user, :language_ids, @lista_analista, :id, :nome) do |b| %>
-			   			<label style="margin: 5px;">
-			   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
-			   			</label>
-					<% end %>
+				<%= collection_check_boxes(:user, :language_ids, @lista_analista, :id, :nome) do |b| %>
+		   			<label style="margin: 5px;">
+		   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+		   			</label>
+				<% end %>
 		    </p>
 		  </div>
 		</div>
@@ -54,28 +54,28 @@
 		  <div class="card-body">
 		    <p class="card-text">É o profissional que desenvolve aplicativos para celular, podendo ser desenvolvimento nativo e também através de ferramentas que geram aplicativos multiplataformas.</p>
 		    <p>
-					<%= collection_check_boxes(:user, :language_ids, @lista_mobile, :id, :nome) do |b| %>
-			   			<label style="margin: 5px;">
-			   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
-			   			</label>
-					<% end %>
+				<%= collection_check_boxes(:user, :language_ids, @lista_mobile, :id, :nome) do |b| %>
+		   			<label style="margin: 5px;">
+		   				<%= b.label(:"data-value" => b.value) { b.check_box + " " + b.text } %>
+		   			</label>
+				<% end %>
 		    </p>
 		  </div>
 		</div>
 
 		<br>
 
-  	<%= submit_tag 'Salvar', class: "btn btn-primary"%>
+		<div class="lista-de-linguagens alert alert-primary"></div>
 
-  	<br>
-  	<br>
-  	<br>
+  		<%= submit_tag 'Salvar', class: "btn btn-primary"%>
+
+  		<br>
+  		<br>
+  		<br>
 
 	<% end -%>
 
 </div>
-
-<div id="total"></div>
 
 <style type="text/css">
     body {
@@ -83,44 +83,4 @@
     }
 </style>
 
-
-<script type="text/javascript">
-	
-	$('input[type=checkbox]').change(function() {
-
-    if(this.checked) {
-
-      console.log( $(this).val() );
-
-			$.ajax({
-	      type: "GET",
-	      contentType: "application/json",      
-	      url: "/users/test",
-	      success: function(data){
-
-	        console.log(data)
-	        
-	      }
-	    });
-
-
-
-    }
-		
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	});
-
-
-</script>
+<script src="languages.js" type="text/javascript" async defer></script>

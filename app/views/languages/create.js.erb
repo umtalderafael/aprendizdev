@@ -1,3 +1,7 @@
 $('#modalCadastro').modal('hide')
 
+$('.input-nome').val('')
+
+$('.input-carreira').val('')
+
 $('table#languages tbody').prepend("<%= escape_javascript(render @language ) %>")

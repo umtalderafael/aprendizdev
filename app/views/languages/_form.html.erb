@@ -17,12 +17,12 @@
 
   <div class="form-group">
     <%= form.label :nome %>
-    <%= form.text_field :nome, class: "form-control" %>
+    <%= form.text_field :nome, class: "form-control input-nome" %>
   </div>
 
   <div class="form-group">
      <label> Carreira </label><br>
-    <%= collection_select(:language, :career_id, Career.all, :id, :nome, prompt: 'Selecione uma carreira') %>
+    <%= collection_select(:language, :career_id, Career.all, :id, :nome, {:prompt => 'Selecione uma carreira'}, { class: "form-control input-carreira" }) %>
   </div>
 
   <div class="actions">

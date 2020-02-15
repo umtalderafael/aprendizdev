@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :profile, only: %i[index update]
 
 
-  get 'users/test', to: 'users#test'
+  get 'users/quantidade', to: 'users#quantidade'
 
 
 
