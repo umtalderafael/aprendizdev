@@ -1,0 +1,5 @@
+<% unless @post.errors.any? %>
+
+  $('<%= "#post-#{@post.id}" %>').fadeOut();
+
+<% end %>

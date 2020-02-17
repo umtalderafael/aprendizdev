@@ -3,36 +3,38 @@ $( document ).ready(function() {
 });
 
 $('input[type=checkbox]').change(function() {
-
-	$( ".lista-de-linguagens" ).show(); 
 	
     if(this.checked) {
 
+    	$(".lista-de-linguagens").show()
+
     	if ( validarStorage('linguagens') ) {
     		var linguagens = pegarStorage('linguagens')  
-    		var id =  getValue($(this));    		  
-    		var label = getLabel($(this));  		    		
-    		linguagens.push({'id' : id, 'label': label});
+    		var id =  getValue($(this))		  
+    		var label = getLabel($(this))		    		
+    		linguagens.push({'id' : id, 'label': label})
     		getTotal(id, label)
 			criarStorage('linguagens', linguagens)    		
     	}
     	else {
     		var linguagens = []    		
-    		linguagens.push({'id' : getValue($(this)), 'label': getLabel($(this))});
+    		linguagens.push({'id' : getValue($(this)), 'label': getLabel($(this))})
     		getTotal(linguagens[0].id, linguagens[0].label)
     		criarStorage('linguagens', linguagens)      		
     	}
     }
     else {
 
-    	if ( validarStorage('linguagens') ) {
+    	if (validarStorage('linguagens')) {
+
+    		$(".lista-de-linguagens").show()
 
     		var linguagens = pegarStorage('linguagens') 
  
 			for (var i = 0; i < linguagens.length; ++i) {
 				if (linguagens[i].id == $(this).val()) {
-					removerLinguagem(linguagens[i].label.replace(" ", "")) 
-					linguagens.splice(i, 1);					
+					removerLinguagem(linguagens[i].id)
+					linguagens.splice(i, 1)				
 				}
 			}
 
@@ -47,8 +49,8 @@ $('input[type=checkbox]').change(function() {
 });
 
 function limpar() {
-	$( ".lista-de-linguagens" ).hide();
-	if ( localStorage.getItem('linguagens') ) localStorage.removeItem('linguagens');	
+	$(".lista-de-linguagens").hide();
+	if (validarStorage('linguagens')) localStorage.removeItem('linguagens')
 }
 
 function getLabel(check) {
@@ -83,43 +85,40 @@ function getTotal(id, label){
         	else if(data.total > 1) {
         		total = data.total + ' usuários'
         	}
-
-        	adicionarLinguagem(data.label, total)
+        	adicionarLinguagem(id, data.label, total)
         }	        
       }
     });
 }
 
-function adicionarLinguagem(label, total) {
+function adicionarLinguagem(id, label, total) {
 
-	var id = label.replace(" ", "");
+    var badge = $("<button type='button' class='btn btn-sm btn-primary m-1' id='"+ id +"'>" + 
+                  label + " <span class='badge badge-light'>" + total + "</span>" + 
+                "</button>").hide().fadeIn()
 
-	var badge = "<button type='button' class='btn btn-sm btn-primary m-1' id='"+ id +"'>" + 
-				  label + " <span class='badge badge-light'>" + total + "</span>" + 
-				"</button>";
-
-	$( ".lista-de-linguagens" ).prepend( badge );
+	$(".lista-de-linguagens").prepend( badge )
 }
 
 function removerLinguagem(label){
-	$("#" + label).remove();
+	$("#" + label).fadeOut()
 }
 
 function criarStorage(nome, dados) {		
-	localStorage.setItem(nome, JSON.stringify(dados) );  
+	localStorage.setItem(nome, JSON.stringify(dados) ) 
 } 
 
 function pegarStorage(nome) { 		
-	return JSON.parse( localStorage.getItem(nome) );  
+	return JSON.parse( localStorage.getItem(nome) )
 }
 
 function validarStorage(nome) { 
-	var dados =  localStorage.getItem(nome) ; 
+	var dados =  localStorage.getItem(nome)
 	if (dados != null) {
-		if (dados != 'null') return true;
-		else return false;		
+		if (dados != 'null') return true
+		else return false
 	}
 	else{
-		return false;
+		return false
 	}
 }

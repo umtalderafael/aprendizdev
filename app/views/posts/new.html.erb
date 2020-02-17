@@ -1,0 +1,64 @@
+<div class="container mt-s mb-5">
+
+    <%= form_for @post do |f|  %>
+
+        <div class="card mt-5">
+            <h5 class="card-header">
+                Nova postagem
+                <div class="float-right">
+                    <%= f.submit "Salvar", class: "btn btn-sm btn-primary" %>
+                </div>
+            </h5>
+
+            <div class="card-body">
+                
+                <p class="card-text">
+             
+                    <input type="text" name="classroom_id" value="<%= @classroom_id %>" hidden>
+                    <input type="text" name="post[user_id]" value="<%= @user_id %>" hidden>
+
+                    <div class="card-body">
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="input-first-name"> <b> Título </b> </label> <br>
+                                        <%= f.text_field :nome , placeholder: "Escreva um título", class: 'form-control', :required => true %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pl-lg-4">
+                            <div class="form-group focused">
+                                <label> <b>Escreva sua tarefa ou instrução </b></label>
+
+                               <input id="texto" type="hidden" name="post[texto]" hidden="true">
+
+                                <trix-editor input="texto"></trix-editor>
+                            </div>
+                        </div>
+
+                        <div class="pl-lg-4">
+                            <div class="form-group focused">
+                                <label> <b>Anexos </b></label>
+                                <%= f.file_field :anexos, multiple: true, class: "form-control-file" %>                
+                            </div>
+                        </div>
+
+                    </div>
+
+                </p>
+           
+          </div>
+        </div>
+
+    <%end%>  
+</div>
+
+<style type="text/css">
+  body {
+    background-color: #f2f2f2;
+  }
+</style>

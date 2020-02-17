@@ -9,45 +9,67 @@
     </div>
   <% end %>
 
-  <h3>Salas de aula</h3>
-  <br>
+  <div class="card" style="margin-top: 100px;">
+    <div class="card-header">
+      <h3> <i class="fas fa-school"></i> Salas de aula</h3>
+    </div>
+    <div class="card-body">
+ 
+      <% if @user.classrooms.size > 0 %>
 
-  <table class="table table-condensed table-hover">   
-      <thead>
-          <tr>
-              <th>Nome</th>
-              <th>Status</th>
-              <th></th>
-          </tr>
-      </thead>
-      <tbody>     
-          <% @user.classrooms.each do |sala| %>
-          <tr>
-              <td>
-                <%= link_to(sala) do %>
-                  <strong><%= sala.nome %></strong>  
-                <% end %>
-              </td>
-              <td>    
-                  <% if sala.ativa %>
-                    <i class="far fa-thumbs-up"></i> Ativa
-                  <% else %>
-                    <i class="far fa-thumbs-down"></i> Inativa
+          <table class="table table-borderless table-sm table-hover" >   
+              <thead>
+                  <tr>
+                      <th>Nome</th>
+                      <th>Status</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>     
+                  <% @user.classrooms.each do |sala| %>
+                  <tr>
+                      <td>
+                        <%= link_to(sala) do %>
+                          <strong><%= sala.nome %></strong>  
+                        <% end %>
+                      </td>
+                      <td>    
+                          <% if sala.ativa %>
+                            <i class="far fa-thumbs-up"></i> Ativa
+                          <% else %>
+                            <i class="far fa-thumbs-down"></i> Inativa
+                          <% end %>
+                      </td>
+                      <td>
+                          <% if sala.ativa %>
+                            <%= button_to "Desativar", { action: "status", id: sala.id }, class: "btn btn-danger btn-sm", data: {title: "Atenção!", confirm: 'Tem certeza que deseja desativar?', commit: 'Desativar', cancel: "Cancelar"}  %>
+                          <% else %>
+                            <%= button_to "Ativar", { action: "status", id: sala.id }, class: "btn btn-success btn-sm", data: {title: "Atenção!", confirm: 'Tem certeza que deseja ativar?', commit: 'Ativar', cancel: "Cancelar"}   %>
+                          <% end %>
+                      </td>
+                  </tr>
                   <% end %>
-              </td>
-              <td>
-                  <% if sala.ativa %>
-                    <%= button_to "Desativar", { action: "status", id: sala.id }, class: "btn btn-danger btn-sm", data: {title: "Atenção!", confirm: 'Tem certeza que deseja desativar?', commit: 'Desativar', cancel: "Cancelar"}  %>
-                  <% else %>
-                    <%= button_to "Ativar", { action: "status", id: sala.id }, class: "btn btn-success btn-sm", data: {title: "Atenção!", confirm: 'Tem certeza que deseja ativar?', commit: 'Ativar', cancel: "Cancelar"}   %>
-                  <% end %>
-              </td>
-          </tr>
-          <% end %>
-      </tbody>
-  </table>
+              </tbody>
+          </table>
+
+        <% else %>   
+
+          <div class="alert alert-primary">
+            <h5>Nenhuma sala encontrada</h5>        
+          </div>
+
+         <% end %>
+
+    </div>
+  </div>
 
   <br>
   <br>
 
 </div>
+
+<style type="text/css">
+  body {
+    background-color: #f2f2f2;
+  }  
+</style>

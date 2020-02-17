@@ -1,6 +1,7 @@
 <div class="container mt-5">
   <center>
     <h3><%= @sala.nome %></h3>
+    <hr style="width: 100px">
   </center> 
 </div>
 
@@ -18,15 +19,8 @@
 
                             <p class="card-text">
                                 <%= @dev.nome %> <br>
-                                <%= age(@dev.nascimento) %> anos
-                            </p>
-
-                            <p class="card-text">
-                              <% @dev.languages.each do |linguagem| %>
-                                  <button class="btn btn-sm btn-outline-primary">
-                                    <%= linguagem.nome %> 
-                                  </button>
-                              <% end %>
+                                <%= age(@dev.nascimento) %> anos <br>
+                                <%= @dev.location.cidade %> - <%= @dev.location.estado %> <br>
                             </p>
                             
                         </div>
@@ -37,6 +31,15 @@
                         <div class="card-body text-center mt-4">
                             <h4 class="card-title">Descrição</h4>
                             <p class="card-text"><%= @dev.descricao %></p>
+
+                            <p class="card-text">
+                              <% @dev.languages.each do |linguagem| %>
+                                  <button class="btn btn-sm btn-outline-primary" style="margin: 5px">
+                                    <%= linguagem.nome %> 
+                                  </button>
+                              <% end %>
+                            </p>
+
                         </div>
                     </div>
                 </div>
@@ -55,15 +58,8 @@
                             
                             <p class="card-text">
                               <%= @aprendiz.nome %> <br>
-                              <%= age(@aprendiz.nascimento) %> anos
-                            </p>
-
-                            <p class="card-text">
-                              <% @aprendiz.languages.each do |linguagem| %>
-                                  <button class="btn btn-sm btn-outline-primary">
-                                    <%= linguagem.nome %> 
-                                  </button>
-                              <% end %>
+                              <%= age(@aprendiz.nascimento) %> anos <br>
+                              <%= @aprendiz.location.cidade %> - <%= @aprendiz.location.estado %> <br>
                             </p>
 
                         </div>
@@ -74,6 +70,15 @@
                         <div class="card-body text-center mt-4">
                             <h4 class="card-title">Descrição</h4>
                             <p class="card-text"> <%= @aprendiz.descricao %> </p>
+
+                            <p class="card-text">
+                              <% @aprendiz.languages.each do |linguagem| %>
+                                  <button class="btn btn-sm btn-outline-primary" style="margin: 5px">
+                                    <%= linguagem.nome %> 
+                                  </button>
+                              <% end %>
+                            </p>
+
                         </div>
                     </div>
                 </div>
@@ -83,10 +88,10 @@
         
   </div>
 
-  <div class="row mt-5">
+  <div class="row mt-4 mb-4">
     <div class="col-sm">
 
-      <%= form_tag('/posts') do -%>
+      <%= form_tag('/posts/new', :method => :get) do -%>
 
         <input type="text" name="post[classroom_id]" value="<%= @sala.id %>" hidden>
         <input type="text" name="post[user_id]" value="<%= @user.id %>" hidden>
@@ -103,6 +108,75 @@
   </div>
 </div>
 
+<div class="container mb-5">
+
+  <div class="card"  >
+    <div class="card-body">
+      <h5 class="card-title">Postagens</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Tarefas e instruções</h6>
+      <p class="card-text">
+
+        <% if @sala.posts.size > 0 %>
+
+          <div class="table-responsive">
+              
+            <table class="table table-condensed table-border table-hover" id="languages">
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Criado em</th>
+                  <th>Usuário</th>
+                  <th colspan="2"></th>
+                </tr>
+              </thead>
+
+              <tbody>         
+
+                <% @sala.posts.each do |post| %>
+                  <tr id="post-<%=post.id%>">
+                    <td>
+                      <%= link_to(post) do %>
+                        <%= post.nome %>
+                      <% end %>
+                    </td>
+
+                    <td>
+                      <%= post.created_at.strftime("%d/%m/%Y") %>
+                    </td>
+
+                    <td> 
+                      <%= User.find(post.user_id).nome %> 
+                    </td>
+                                        
+                    <td>
+                      <%= link_to 'Editar', edit_post_path(post) %>
+                    </td>
+
+                    <td>
+                      <%= button_to "Remover", post, method: :delete,  remote: true, class: "btn btn-danger btn-sm", data: {title: "Atenção!", confirm: 'Tem certeza que deseja apagar?', commit: 'Apagar', cancel: "Cancelar"}   %>  
+                    </td>
+
+                  </tr>
+                <% end %>
+
+              </tbody>
+            </table>
+
+          </div>
+
+        <% else %>
+
+          <div class="alert alert-primary">
+            <h4>Nenhuma postagem</h4>                  
+          </div>
+
+        <% end %>
+
+      </p>    
+    </div>
+  </div>  
+  
+</div>
 
 <style type="text/css">
     

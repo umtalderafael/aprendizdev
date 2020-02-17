@@ -19,7 +19,11 @@
       		</blockquote>
       		<p>
         		<%= @user.username %> <br>
-        		<a href="<%= @user.repositorio %>" target="_blank"> <%= @user.repositorio %> </a> <br>
+
+            <% if @user.repositorio %>
+        		  <a href="<%= @user.repositorio %>" target="_blank"> <%= @user.repositorio %> </a> <br>
+            <% end %>
+
         		<%= age(@user.nascimento) %> anos
       		</p>
     	</div>
@@ -77,26 +81,43 @@
 			    	  <p class="card-text"><%= u.descricao %></p>
             <% end %>
 
+            <% if u.repositorio %>
+              <h5 class="card-title">Repositório </h5>
+              <p class="card-text">
+                <a href="<%= u.repositorio %>" title="Repositório" target="_blank"><%= u.repositorio %></a>
+              </p>
+            <% end %>
+
 			    	<h5 class="card-title">Linguagens</h5>
 			    	<p class="card-text">
 
-			    		<% u.languages.each do |linguagem| %>
+              <% if u.languages.size > 0 %>
 
-			    			<% if @linguagens_user.include? linguagem.id %>
+  			    		<% u.languages.each do |linguagem| %>
 
-				    			<button class="btn btn-outline-danger">
-				    				<strong><%= linguagem.nome %></strong> 
-				    			</button>
+  			    			<% if @linguagens_user.include? linguagem.id %>
 
-				    		<% else %>
+  				    			<button class="btn btn-outline-danger">
+  				    				<strong><%= linguagem.nome %></strong> 
+  				    			</button>
 
-				    			<button class="btn btn-outline-primary">
-				    				<%= linguagem.nome %> 
-				    			</button>
+  				    		<% else %>
 
-				    		<% end %>
+  				    			<button class="btn btn-outline-primary">
+  				    				<%= linguagem.nome %> 
+  				    			</button>
 
-			    		<% end %>
+  				    		<% end %>
+
+  			    		<% end %>
+
+              <% else %>
+
+                <div class="alert alert-primary">
+                    <h6>Nenhuma linguagem encontrada</h6>
+                </div>
+
+              <% end %>
 
 			    	</p>
 
