@@ -117,13 +117,22 @@ class UsersController < ApplicationController
 
   def home 
     @user = User.find(session[:user_id])
-
-    if @user.aprendiz?
-      @pagy, @lista_usuarios = pagy(User.lista_usuarios(@user, 'Desenvolvedor'), items: 5)
-    else  
-      @pagy, @lista_usuarios = pagy(User.lista_usuarios(@user, 'Aprendiz'), items: 5)
-    end
+    @lista = params['lista']
     @linguagens_user = @user.languages_id_array
+
+    if @lista == 'linguagem'
+      if @user.aprendiz?
+        @pagy, @lista_usuarios = pagy(User.desenvolvedores.by_languages(@linguagens_user), items: 5)
+      else  
+        @pagy, @lista_usuarios = pagy(User.aprendiz.by_languages(@linguagens_user), items: 5)
+      end
+    else
+      if @user.aprendiz?
+        @pagy, @lista_usuarios = pagy(User.desenvolvedores.by_location(@user), items: 5)
+      else  
+        @pagy, @lista_usuarios = pagy(User.aprendiz.by_location(@user), items: 5)
+      end
+    end
   end
 
   def busca

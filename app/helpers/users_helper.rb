@@ -12,20 +12,26 @@ module UsersHelper
     'https://library.kissclipart.com/20181001/wbw/kissclipart-gsmnet-ro-clipart-computer-icons-user-avatar-4898c5072537d6e2.png' 
   end
 
-  def msg_resultado(user)
-    if user.tipo == 'Aprendiz'
-      tipo = 'Veja abaixo os desenvolvedores '
-    else
-      tipo = 'Veja abaixo os aprendizes '
-    end
-    "#{tipo} encontrados em #{@user.location.cidade} - #{@user.location.estado}"
-  end
+  def msg_resultado(user, lista)
 
+    if lista == 'linguagem'
+      if user.tipo == 'Aprendiz'
+        tipo = 'Veja abaixo os desenvolvedores encontrados pelas linguagens'
+      else
+        tipo = 'Veja abaixo os aprendizes encontrados pelas linguagens'
+      end
+    else 
+      if user.tipo == 'Aprendiz'
+        tipo = 'Veja abaixo os desenvolvedores '
+      else
+        tipo = 'Veja abaixo os aprendizes '
+      end
+      "#{tipo} encontrados em #{@user.location.cidade} - #{@user.location.estado}"
+    end
+  end
 
   def age(dob)
     now = Time.now.utc.to_date
     now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
   end
-
-  
 end

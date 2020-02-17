@@ -63,15 +63,10 @@
       <%= icon('far', 'user', class: 'strong') %> <%= current_user.nome.to_s.split(' ')[0] %> 
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
       <a class="dropdown-item" href="/users/<%= session[:user_id] %>/edit">Meus dados</a> 
-
       <a class="dropdown-item" href="/locations/<%= session[:user_id] %>/edit">Localização</a>   
-
       <a class="dropdown-item" href="/users/languages?t=edit">Linguagens</a>                       
-
       <%= button_to "Sair", '/logout', method: :get, class: "dropdown-item", data: {title: "Atenção!", confirm: 'Tem certeza que deseja sair?', commit: 'Sair', cancel: "Cancelar"}  %>
-
     </div>
   </div>
 

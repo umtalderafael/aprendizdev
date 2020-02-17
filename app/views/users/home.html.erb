@@ -1,5 +1,4 @@
-<div class="container mt-5">
-
+<div class="container mt-5 mb-5">
   	<div class="row container-user">
     	<div class="col-sm-3 img">
 
@@ -32,16 +31,22 @@
  
 	<% if @lista_usuarios.size > 0 %>
 
-		<h5><%= msg_resultado(@user)  %></h5>
+		<h5><%= msg_resultado(@user, @lista)  %></h5>
 
     <button class="btn btn-danger">
     </button> *As linguagens em vermelho são os interesses em comum 
+    <br>
+    <br>
+
+    <% if @lista == 'linguagem' %>
+      <a class="btn btn-primary" href="/users/home">Buscar pela localidade </a>      
+    <% else %>
+      <a class="btn btn-primary" href="/users/home?lista=linguagem">Buscar pelas linguagens</a>    
+    <% end %>
 
 		<br>
     <br>
-
     <%= pagy_bootstrap_nav(@pagy).html_safe %>
-
     <br>
 
 		<% @lista_usuarios.each do |u| %>
@@ -54,7 +59,9 @@
                 <img src="<%= avatar(u) %>" alt="Avatar" class="rounded">
               </div>
               <h4 class="name"><%= u.nome %></h4>
-              <span class="designation"><%= age(u.nascimento) %> anos</span>
+              <span class="designation">
+                <%= age(u.nascimento) %> anos, mora em <%= u.location.cidade %> - <%= u.location.estado %>
+              </span>
             </div>
 
             <div class="float-right">
@@ -108,33 +115,31 @@
   				    			</button>
 
   				    		<% end %>
-
   			    		<% end %>
-
               <% else %>
 
                 <div class="alert alert-primary">
                     <h6>Nenhuma linguagem encontrada</h6>
                 </div>
-
               <% end %>
 
 			    	</p>
-
 			  	</div>
 			</div>
 
 		<% end %>
 
+    <%= pagy_bootstrap_nav(@pagy).html_safe %>
+
 	<% else %>
 
 		<h3>Nenhum usuário foi encontrado nessa localidade.</h3>
 		<br>
-		<a class="btn btn-primary" href="/locations/<%= session[:user_id] %>/edit">Trocar minha localização</a>  
+		<a class="btn btn-primary" href="/locations/<%= session[:user_id] %>/edit">Trocar minha localização</a>  <span class="badge">ou</span> 
+
+    <a class="btn btn-primary" href="/users/home?lista=linguagem">Buscar pelas linguagens</a> 
 
 	<% end %>
-
-  <%= pagy_bootstrap_nav(@pagy).html_safe %>
 
 	<br>
 	<br>
